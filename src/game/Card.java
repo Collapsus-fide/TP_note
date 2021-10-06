@@ -20,6 +20,7 @@ public class Card extends Comparable{
 
     @Override
     public int compareTo(Card C) {
-        return
+        //TODO
+        return 1;
     }
 }
