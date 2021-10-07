@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    String name;
+    public String name;
     public ArrayList<Card> hand;
     boolean skipped = false;
 

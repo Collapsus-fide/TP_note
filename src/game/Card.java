@@ -1,11 +1,14 @@
 package game;
 
-public class Card extends Comparable{
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Card implements Comparable {
     public String val;
     public String suit;
     public int points;
 
-    public Card(String val, String suit, int points){
+    public Card(String val, String suit, int points) {
         this.val = val;
         this.suit = suit;
         this.points = points;
@@ -19,8 +22,35 @@ public class Card extends Comparable{
     }
 
     @Override
-    public int compareTo(Card C) {
-        //TODO
-        return 1;
+    public int compareTo(Object C) {
+        CardComparator compar = new CardComparator();
+        return compar.compare(this, (Card) C);
+
     }
+    static class CardComparator implements Comparator<Card> {
+        public int compare(Card c1, Card c2) {
+            if (c1.suit.compareTo(c2.suit)==0){
+                if (c1.points > c2.points) {
+                    return 1;
+                }
+                if (c1.points < c2.points) {
+                    return -1;
+                }
+            }else if (c1.suit.compareTo(c2.suit)>0){
+                return 1;
+            }else{
+                return -1;
+            }
+
+            return 0;
+        }
+    }
+
+    static class SuitComparator implements Comparator<Card> {
+        public int compare(Card c1, Card c2) {
+            return c1.suit.compareTo(c2.suit);
+        }
+    }
+
+
 }

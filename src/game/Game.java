@@ -2,10 +2,7 @@ package game;
 
 import structures.File;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game {
     public File playerOrder;
@@ -113,6 +110,9 @@ public class Game {
         }
         for(Card card : cards){
             playerOrder.advance().hand.add(card);
+        }
+        for(int i =0 ; i<4;i++){
+            Collections.sort(playerOrder.advance().hand);
         }
 
 
