@@ -12,5 +12,6 @@ public class Launcher {
         System.out.println(jeu.playerOrder.advance().hand);
         System.out.println(jeu.playerOrder.origin.player.name);
         System.out.println(jeu.playerOrder.advance().hand);
+        jeu.playTurn();
     }
 }

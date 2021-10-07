@@ -6,24 +6,11 @@ import java.util.*;
 
 public class Game {
     public File playerOrder;
-    public HashMap<String, Integer > hash = new HashMap<String, Integer>();
+    HashMap<Card,Player> cardPlayed = new HashMap<>();
     Player CurrentPlayer;
 
     public Game(){
         playerOrder = new File();
-        hash.put("3",0 );
-        hash.put("4",1 );
-        hash.put("5",2 );
-        hash.put("6",3 );
-        hash.put("7",4 );
-        hash.put("8",5 );
-        hash.put("9",6 );
-        hash.put("10",7 );
-        hash.put("J",8 );
-        hash.put("Q",9 );
-        hash.put("R",10 );
-        hash.put("A",11 );
-        hash.put("2",12 );
     }
     public void addPlayers(){
         Scanner scanner = new Scanner(System.in);
@@ -114,8 +101,17 @@ public class Game {
         for(int i =0 ; i<4;i++){
             Collections.sort(playerOrder.advance().hand);
         }
+    }
+    public void playTurn(){
+        List<Card> cardsThisTurn = new ArrayList<>();
+        for(int i =0 ; i<4;i++){
+            Card played = playerOrder.origin.player.play();
+            cardPlayed.put(played,playerOrder.advance());
+            cardsThisTurn.add(played);
 
-
+        }
+        Collections.sort(cardsThisTurn);
+        System.out.println(cardsThisTurn);
 
     }
 
