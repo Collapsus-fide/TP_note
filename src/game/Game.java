@@ -126,10 +126,36 @@ public class Game {
             winner.wins +=1;
             System.out.println("Player "+winner.name+ " wins !");
         }
-
-        System.out.println("played this turn: "+cardsThisTurn+"]\n");
+        System.out.println("Cards played this turn: "+cardsThisTurn+"]\n");
 
     }
+    public void playTurnSameSuit(){
+        List<Card> validCards = new ArrayList<>();
+        List<Card> invalidCards = new ArrayList<>();
+        Card played = playerOrder.origin.player.play();
+        String suitPlayed = played.suit;
+        cardPlayed.put(played,playerOrder.advance());
+        validCards.add(played);
+        for(int i =1 ; i<4;i++){
+            played = playerOrder.origin.player.playSameSuitIfPossible(suitPlayed);
+            cardPlayed.put(played,playerOrder.advance());
+            if (played.suit.equals(suitPlayed)){
+                validCards.add(played);
+            }else{
+                invalidCards.add(played);
+            }
+
+        }
+        Collections.sort(validCards,new Card.valueComparator());
+        Collections.reverse(validCards);
+        Player winner = cardPlayed.get(validCards.get(0));
+        winner.wins +=1;
+        System.out.println("Player "+winner.name+ " wins !");
+        validCards.addAll(invalidCards);
+        Collections.sort(validCards,new Card.valueComparator());
+        System.out.println("Cards played this turn: "+ validCards+"\n");
+    }
+
     public List<Player> end(){
         List<Player> res = new ArrayList<>();
         for (int i=0;i<4;i++){

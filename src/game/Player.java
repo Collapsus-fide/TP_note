@@ -1,9 +1,6 @@
 package game;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.EmptyStackException;
-import java.util.Random;
+import java.util.*;
 
 public class Player {
     public String name;
@@ -31,9 +28,33 @@ public class Player {
     @Override
     public String toString() {
         return "Player{" +
-                "name='" + name+
+                "name= " + name+
                 " ,wins ="+ wins+"}\n";
     }
+
+    public Card playSameSuitIfPossible(String suit) {
+        List<Card> playable =new ArrayList<>();
+        Random r = new Random();
+        int low = 0;
+        for (Card c: hand
+             ) {
+
+            if(c.suit.equals(suit)){
+                playable.add(c);
+            }
+        }
+        if(playable.isEmpty()){
+            int high = hand.size();
+            return hand.get(r.nextInt(high-low) + low);
+        }else{
+
+
+            int high = playable.size();
+            return playable.get(r.nextInt(high-low) + low);
+        }
+
+    }
+
     static class PlayerPointsComparator implements Comparator<Player> {
         public int compare(Player p1, Player p2) {
             if(p2.wins>p2.wins){
