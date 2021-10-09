@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Game {
     public File playerOrder;
-    HashMap<Card,Player> cardPlayed = new HashMap<>();
+    public HashMap<Card,Player> cardPlayed = new HashMap<>();
     Player CurrentPlayer;
 
     public Game(){
@@ -101,6 +101,14 @@ public class Game {
         for(int i =0 ; i<4;i++){
             Collections.sort(playerOrder.advance().hand);
         }
+        System.out.println(playerOrder.origin.player.name);
+        System.out.println(playerOrder.advance().hand);
+        System.out.println(playerOrder.origin.player.name);
+        System.out.println(playerOrder.advance().hand);
+        System.out.println(playerOrder.origin.player.name);
+        System.out.println(playerOrder.advance().hand);
+        System.out.println(playerOrder.origin.player.name);
+        System.out.println(playerOrder.advance().hand);
     }
     public void playTurn(){
         List<Card> cardsThisTurn = new ArrayList<>();
@@ -110,9 +118,26 @@ public class Game {
             cardsThisTurn.add(played);
 
         }
-        Collections.sort(cardsThisTurn);
-        System.out.println(cardsThisTurn);
+        Collections.sort(cardsThisTurn,new Card.valueComparator());
+        Player winner = cardPlayed.get(cardsThisTurn.get(3));
+        if(cardsThisTurn.get(0).val.equals(cardsThisTurn.get(1).val)){
+            System.out.println("égalité ce tour, personne ne remporte de points !");
+        }else{
+            winner.wins +=1;
+            System.out.println("Player "+winner.name+ " wins !");
+        }
 
+        System.out.println("played this turn: "+cardsThisTurn+"]\n");
+
+    }
+    public List<Player> end(){
+        List<Player> res = new ArrayList<>();
+        for (int i=0;i<4;i++){
+            res.add(playerOrder.advance());
+        }
+        Collections.sort(res,new Player.PlayerPointsComparator());
+        Collections.reverse(res);
+        return res;
     }
 
 }

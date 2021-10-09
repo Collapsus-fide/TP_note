@@ -18,7 +18,7 @@ public class Card implements Comparable {
     @Override
     public String toString() {
         return "value=" + val +
-                " suit=" + suit + '\n';
+                " suit=" + suit;
     }
 
     @Override
@@ -46,9 +46,13 @@ public class Card implements Comparable {
         }
     }
 
-    static class SuitComparator implements Comparator<Card> {
+    static class valueComparator implements Comparator<Card> {
         public int compare(Card c1, Card c2) {
-            return c1.suit.compareTo(c2.suit);
+            if(c1.points>c2.points){
+                return 1;
+            }else if(c1.points<c2.points){
+                return -1;
+            }else{return 0;}
         }
     }
 
